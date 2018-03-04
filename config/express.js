@@ -9,10 +9,9 @@ module.exports = function() {
 	app.set('views', './app/views');
 	
 	consign({cwd: 'app'})
-		.include('models')
+		.include('infra')
 		.then('controllers')
 		.then('routes')
-		.then('../config/connectionFactory.js')
 		.into(app);
 		
 	return app;	
