@@ -1,18 +1,18 @@
 const express = require('express');
-const load = require('express-load');
-
-const home = require('../app/routes/home');
+const consign = require('consign');
 
 module.exports = function() {
-	var app = express();
+	let app = express();
 	app.set('port', 3000);
 	app.use(express.static('./public'));
 	app.set('view engine', 'ejs');
 	app.set('views', './app/views');
 	
-	load('models', {cwd: 'app'})
+	consign({cwd: 'app'})
+		.include('models')
 		.then('controllers')
 		.then('routes')
+		.then('../config/connectionFactory.js')
 		.into(app);
 		
 	return app;	
