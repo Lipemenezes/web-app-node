@@ -1,8 +1,7 @@
 module.exports = function (app) {
 
 	let controller = {};
-	let connection = app.infra.connectionFactory;
-
+	let connection = app.infra.connectionFactory();
 	controller.getContactList = function (req, res) {
 		connection.query('select * from contact', function (error, result) {
 			res.json(result);
