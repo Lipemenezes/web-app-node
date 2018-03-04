@@ -1,0 +1,32 @@
+version: "2"
+services:
+        test:
+                build: .
+                command: ./wait-for test
+                volumes:
+                        - .:/app/
+                        - /app/node_modules
+                ports:
+                        - 3001:3000
+                depends_on:
+                        - mysql-test
+                networks:
+                  - test-net        
+                environment:
+                  DATABASE_URL: mysql://hades:webapp@mysql-test/webapp
+                  DB_USERNAME: webapp
+                  DB_PASSWORD: webapp
+                  DB_NAME: webapp
+                  DB_HOSTNAME: mysql-test
+        mysql-test:
+                image: mysql:latest
+                environment:
+                        MYSQL_ROOT_PASSWORD: webapppwd
+                        MYSQL_DATABASE: webapp
+                        MYSQL_USER: webapp
+                        MYSQL_PASSWORD: webapp
+                networks:
+                  - test-net  
+networks:
+  test-net:
+    driver: bridge

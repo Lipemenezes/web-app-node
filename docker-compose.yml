@@ -1,0 +1,25 @@
+services:
+        web:
+                build: .
+                command: ./wait-for
+                volumes:
+                        - .:/app/
+                        - /app/node_modules
+                ports:
+                        - 3000:3000
+                depends_on:
+                        - mysql
+                environment:
+                  DATABASE_URL: mysql://hades:webapp@mysql/webappdb
+                  DB_PASSWORD: webapp
+                  DB_USERNAME: webapp
+                  DB_PASSWORD: webapp
+                  DB_NAME: webappdb
+                  DB_HOSTNAME: mysql
+        mysql:
+                image: mysql:latest
+                environment:
+                        MYSQL_ROOT_PASSWORD: webapppwd
+                        MYSQL_DATABASE: webappdb
+                        MYSQL_USER: webapp
+                        MYSQL_PASSWORD: webapp
