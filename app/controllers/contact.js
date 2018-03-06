@@ -1,11 +1,12 @@
 module.exports = function (app) {
 
-	let controller = {};
-	let connection = app.infra.connectionFactory();
+	const controller = {};
+	const sequelize = app.infra.connectionFactory();
+
 	controller.getContactList = function (req, res) {
-		connection.query('select * from contact', function (error, result) {
-			res.json(result);
-		});
+		// connection.query('select * from contact', function (error, result) {
+		// 	res.json(result);
+		// });
 	};
 
 	controller.getContact = function (req, res) {

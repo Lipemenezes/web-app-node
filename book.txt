@@ -1,1 +1,8 @@
 chapter 3 - using bower - pg 37
+
+-- SEQUELIZE CLI --
+sequelize db:create node_webapp
+sequelize model:generate --name Contact --attributes firstName:string
+sequelize db:migrate
+sequelize seed:generate --name insert-admin-into-contact
+sequelize db:seed:all

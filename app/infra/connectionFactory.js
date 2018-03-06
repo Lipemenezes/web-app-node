@@ -1,11 +1,17 @@
-module.exports = function () {
+module.exports = function (app) {
 	return function () {
-		let mysql = require('mysql');
-		let connection = mysql.createConnection({
+		const Sequelize = require('sequelize');
+		const sequelize = new Sequelize('node_webapp', 'root', '', {
 			host: 'localhost',
-			user: 'root',
-			database: 'node_webapp'
+			dialect: 'mysql',
+			operatorsAliases: false,
+			pool: {
+				max: 5,
+				min: 0,
+				acquire: 30000,
+				idle: 10000
+			},
 		});
-		return connection;
-	};
+		return sequelize;
+	}
 };
